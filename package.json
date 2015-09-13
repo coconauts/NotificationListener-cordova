@@ -1,0 +1,23 @@
+{
+    "version": "0.0.1",
+    "name": "net.coconauts.notification-listener",
+    "cordova_name": "Notification-listener",
+    "description": "Notification listener Plugin for Android",
+    "license": "Apache 2.0",
+    "repo": "https://github.com/coconauts/NotificationListener-cordova",
+    "issue": "https://github.com/coconauts/NotificationListener-cordova/issues",
+    "keywords": [
+        "notification",
+        "listener",
+        "android"
+    ],
+    "platforms": [
+        "android"
+    ],
+    "engines": [
+        {
+            "name": "cordova",
+            "version": ">=3.1.0"
+        }
+    ]
+}

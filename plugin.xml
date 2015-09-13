@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin
+    xmlns="http://www.phonegap.com/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="net.coconauts.notification-listener"
+    version="0.0.1">
+
+    <name>Notification-listener</name>
+    <description>Notification listener Plugin for Android</description>
+    <license>Apache 2.0</license>
+    <keywords>notification, listener, android</keywords>
+
+    <repo>https://github.com/coconauts/NotificationListener-cordova</repo>
+    <issue>https://github.com/coconauts/NotificationListener-cordova/issues</issue>
+
+    <engines>
+        <engine name="cordova" version=">=3.1.0" />
+    </engines>
+
+    <js-module src="www/notification-listener.js" name="NotificationListener">
+        <clobbers target="notificationListener" />
+    </js-module>
+
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="NotificationListener">
+                <param name="android-package" value="net.coconauts.notificationListener.NotificationCommands"/>
+            </feature>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
+
+            <service  android:name="net.coconauts.notificationListener.NotificationService"
+              android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+                <intent-filter>
+                  <action android:name="android.service.notification.NotificationListenerService" ></action>
+                </intent-filter>
+            </service>
+
+        </config-file>
+
+        <source-file src="src/android/NotificationService.java"  target-dir="src/net/coconauts/notificationListener"/>
+        <source-file src="src/android/NotificationCommands.java"  target-dir="src/net/coconauts/notificationListener"/>
+
+    </platform>
+
+</plugin>
