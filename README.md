@@ -69,4 +69,6 @@ The notification response received by Javascript is a simplified object from the
 [StatusBarNotification class](https://developer.android.com/reference/android/service/notification/StatusBarNotification.html)
 in Android.
 
-Feel free to update the [notification parser](#TODO) inside this plugin if needed.
+Feel free to update the
+ [notification parser](https://github.com/coconauts/NotificationListener-cordova/blob/master/src/android/NotificationCommands.java#L80) 
+ inside this plugin if needed.
