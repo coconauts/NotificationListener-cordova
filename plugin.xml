@@ -3,7 +3,7 @@
     xmlns="http://www.phonegap.com/ns/plugins/1.0"
     xmlns:android="http://schemas.android.com/apk/res/android"
     id="net.coconauts.notification-listener"
-    version="0.0.1">
+    version="0.0.2">
 
     <name>Notification-listener</name>
     <description>Notification listener Plugin for Android</description>
@@ -28,13 +28,16 @@
             </feature>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+        <config-file target="AndroidManifest.xml" parent="/*">
             <uses-permission android:name="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE"/>
+        </config-file>
+
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
 
             <service  android:name="net.coconauts.notificationListener.NotificationService"
-              android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
+                      android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE" >
                 <intent-filter>
-                  <action android:name="android.service.notification.NotificationListenerService" ></action>
+                    <action android:name="android.service.notification.NotificationListenerService" ></action>
                 </intent-filter>
             </service>
 
