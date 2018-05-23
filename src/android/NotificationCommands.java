@@ -10,6 +10,7 @@ import android.util.Log;
 import org.apache.cordova.PluginResult;
 import android.service.notification.StatusBarNotification;
 import android.os.Bundle;
+import java.util.Set;
 
 public class NotificationCommands extends CordovaPlugin {
 
@@ -82,29 +83,25 @@ public class NotificationCommands extends CordovaPlugin {
         JSONObject json = new JSONObject();
 
         Bundle extras = n.getNotification().extras;
-
-        json.put("title", getExtra(extras, "android.title"));
         json.put("package", n.getPackageName());
-        json.put("text", getExtra(extras,"android.text"));
-        json.put("textLines", getExtraLines(extras, "android.textLines"));
+
+        Set<String> keys = extras.keySet();
+        /* Iterate over all keys of the bundle to give back all the information available */
+        for (String key : keys) {
+            try {
+              String printKey = key;
+              /* If key has a prefix android., this will be removed. */
+              if(printKey.indexOf("android.")==0 && printKey.length()>8){
+                printKey = printKey.substring(8,key.length());
+              }
+              // json.put(key, bundle.get(key)); see edit below
+              json.put(printKey, JSONObject.wrap(extras.get(key)));
+            } catch(JSONException e) {
+                Log.d(TAG,e.getMessage());
+            }
+        }
 
         return json;
     }
 
-    private static String getExtraLines(Bundle extras, String extra){
-        try {
-            CharSequence[] lines = extras.getCharSequenceArray(extra);
-            return lines[lines.length-1].toString();
-        } catch( Exception e){
-            Log.d(TAG, "Unable to get extra lines " + extra);
-            return "";
-        }
-    }
-    private static String getExtra(Bundle extras, String extra){
-        try {
-            return extras.get(extra).toString();
-        } catch( Exception e){
-            return "";
-        }
-    }
 }
